@@ -12,9 +12,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 
 import com.lzx.musiclibrary.MusicService;
 import com.lzx.musiclibrary.R;
@@ -73,6 +74,7 @@ public class SystemNotification implements IMediaNotification {
         }
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void startNotification(SongInfo songInfo) {
         try {
@@ -120,6 +122,7 @@ public class SystemNotification implements IMediaNotification {
         }
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void updateViewStateAtPause() {
         if (mNotificationCreater != null && mNotificationCreater.isNotificationCanClearBySystemBtn()) {
@@ -204,12 +207,10 @@ public class SystemNotification implements IMediaNotification {
                 contentIntent = createContentIntent(mSongInfo, null, clazz);
             }
             //构建Builder
+//            String channelId = createNotificationChannel("my_channel_ID", "my_channel_NAME", NotificationManager.IMPORTANCE_MAX);
+
             notificationBuilder
-                    .setStyle(new android.support.v4.media.app.NotificationCompat.MediaStyle()
-                            .setShowActionsInCompactView(0, 1, 2)
-                            .setShowCancelButton(true)
-                            .setCancelButtonIntent(stopIntent)
-                    )
+                    .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
                     .setDeleteIntent(closeIntent) //当用户点击”Clear All Notifications”按钮区删除所有的通知的时候，这个被设置的Intent被执行
                     .setSmallIcon(R.drawable.icon_notification)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
@@ -232,6 +233,7 @@ public class SystemNotification implements IMediaNotification {
         return null;
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     private PendingIntent createContentIntent(SongInfo songInfo, Bundle bundle, Class targetClass) {
         Intent openUI = new Intent(mService, targetClass);
         openUI.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -245,9 +247,6 @@ public class SystemNotification implements IMediaNotification {
         @SuppressLint("WrongConstant")
         PendingIntent pendingIntent;
         switch (mNotificationCreater.getPendingIntentMode()) {
-            case PendingIntentMode.MODE_ACTIVITY:
-                pendingIntent = PendingIntent.getActivity(mService, REQUEST_CODE, openUI, PendingIntent.FLAG_CANCEL_CURRENT);
-                break;
             case PendingIntentMode.MODE_BROADCAST:
                 pendingIntent = PendingIntent.getBroadcast(mService, REQUEST_CODE, openUI, PendingIntent.FLAG_CANCEL_CURRENT);
                 break;

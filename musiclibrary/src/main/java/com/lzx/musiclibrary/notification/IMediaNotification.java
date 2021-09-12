@@ -1,8 +1,6 @@
 package com.lzx.musiclibrary.notification;
 
-import android.app.Notification;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 
 import com.lzx.musiclibrary.aidl.model.SongInfo;
 

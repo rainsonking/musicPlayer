@@ -12,11 +12,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.widget.RemoteViews;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 
 import com.lzx.musiclibrary.MusicService;
 import com.lzx.musiclibrary.R;

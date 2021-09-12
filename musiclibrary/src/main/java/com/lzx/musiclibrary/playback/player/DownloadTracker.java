@@ -2,16 +2,9 @@ package com.lzx.musiclibrary.playback.player;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.offline.ActionFile;
